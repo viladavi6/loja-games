@@ -1,0 +1,14 @@
+.about {
+    text-align: center;
+}
+
+.about h1 {
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}

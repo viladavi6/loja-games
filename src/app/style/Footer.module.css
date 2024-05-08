@@ -1,0 +1,18 @@
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #18181C;
+    height: 150px;
+    border-top: 3px solid #111;
+    color: #fff;
+    position: fixed; /* Definimos a posição como relativa para evitar que fique fixo na tela */
+    bottom: 0; /* Posiciona o rodapé no final da página */
+    width: 100%; /* Garante que ocupe toda a largura da página */
+    margin-top: 100px;
+}
+
+
+.footer span {
+    font-weight: bold;
+}

@@ -18,23 +18,7 @@
     margin-left: 1em;
 }
 
-.link_items {
-    display: flex;
-    list-style: none;
+.login {
+    text-align: right;
 }
 
-.link_items li {
-    margin-right: 1.3em;
-}
-
-.link_items li a {
-    color: #fff;
-    text-decoration: none;
-    padding: 5px;
-    transition: .4s;
-    border-bottom: 2px solid transparent;
-}
-
-.link_items li a:hover {
-    border-color: #fff;
-}

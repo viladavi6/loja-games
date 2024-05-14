@@ -1,10 +1,11 @@
-.about {
+.contacts {
     text-align: center;
 }
 
-.about h1 {
+.contacts h1 {
     font-size: 2em;
     margin-bottom: 1em;
+    
 }
 
 .imageContainer {

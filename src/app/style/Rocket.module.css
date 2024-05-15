@@ -1,0 +1,46 @@
+/* Rocket.module.css */
+
+.mainBox {
+    margin-bottom: 20px;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.image:hover {
+    transform: scale(1.1);
+}
+
+.thumbnail {
+    cursor: pointer;
+}
+
+.buttons {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+}
+
+.buyButton,
+.cartButton {
+    margin-bottom: 10px;
+    border-radius: 10px; /* Reduzido o raio de borda */
+}
+
+.buyButton {
+    background-color: blue;
+    border: none;
+}
+
+.cartButton {
+    background-color: transparent;
+    border: 2px solid blue;
+    color: blue;
+}

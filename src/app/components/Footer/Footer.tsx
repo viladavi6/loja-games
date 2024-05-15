@@ -9,12 +9,12 @@ export default function Footer() {
             <Container>
                 <Row>
                     <Col className={styles.list}>
-                        <li>
+                        <ul>
                             <Link href="/contacts">Contatos</Link>
-                        </li>
-                        <li>
+                        </ul>
+                        <ul>
                             <Link href="/terms">Termos de Uso</Link>
-                        </li>
+                        </ul>
                     </Col>
                 </Row>
             </Container>

@@ -1,54 +1,20 @@
-.carouselcontainer {
+.contacts {
+    text-align: center;
+}
+
+.contacts h1 {
+    font-size: 2em;
+    margin-bottom: 1em;
+    
+}
+
+.imageContainer {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 0;
+    justify-content: center; 
+    align-items: center; 
 }
 
-.carousellarge {
-    position: relative;
-    width: 60%;
-    margin: 0 auto;
-}
-
-.carousellarge img {
-    width: 100%;
-    height: auto;
-}
-
-.carouselsmall {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 35%;
-}
-
-.carouselsmall .carousel-item {
-    position: relative;
-    margin-bottom: 10px;
-}
-
-.carouselsmall img {
-    width: 100%;
-    height: auto;
-}
-
-.carousel-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    color: white;
-}
-
-.carousel-title {
-    font-size: 18px;
-    margin: 0;
-}
-
-.carousel-description {
-    font-size: 14px;
-    margin: 0;
+.text {
+    text-align: center;
+    font-weight: bold;
 }

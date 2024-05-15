@@ -1,0 +1,82 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+}
+
+.mainBox {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.mainImage {
+    width: 60%;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.imageSelector {
+    margin-top: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.thumbnailContainer {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.thumbnail {
+    cursor: pointer;
+    width: 30%;
+    border-radius: 5px;
+}
+
+.buttonsSection {
+    text-align: center;
+    margin: 5%;
+}
+
+.buyButton,
+.cartButton {
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+    border-width: 3px;
+    padding: 15px 30px;
+    margin: 0 2%;
+}
+
+.buyButton:hover,
+.cartButton:hover {
+    transform: scale(1.05);
+}
+
+.priceCard {
+    background-color: blue;
+    border: none;
+    color: white;
+}
+
+.desc {
+    text-align: justify;
+    padding: 5%;
+    margin: 5%;
+}
+
+.desctitle {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}

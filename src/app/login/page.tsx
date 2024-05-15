@@ -1,4 +1,3 @@
-// Login.js
 import React from 'react';
 import styles from '../style/Login.module.css'; 
 import Image from 'next/image';
@@ -11,12 +10,10 @@ const Login = () => {
         <form className={styles.form}>
           <h2>Entrar ou Cadastrar</h2>
           <div>
-            <label htmlFor="username">Usuário:</label>
-            <input type="text" id="username" />
+            <input type="text" id="username" placeholder='usuário' />
           </div>
           <div>
-            <label htmlFor="password">Senha:</label>
-            <input type="password" id="password" />
+            <input type="password" id="password" placeholder='senha' />
           </div>
           <button type="submit">Entrar</button>
           <button type="submit">Cadastrar</button>

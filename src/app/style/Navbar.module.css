@@ -22,3 +22,15 @@
     text-align: right;
 }
 
+.bar {
+    margin-left: 20px;
+    height: 25px;
+    width: 1px;   
+    margin-bottom: 5px;
+}
+
+.store {
+    margin-left: 18px;
+    margin-bottom: 5px;
+}
+

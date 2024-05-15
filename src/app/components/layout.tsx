@@ -1,6 +1,7 @@
 import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
 
+
 export default function Layout({
     children,
 }: Readonly<{
@@ -9,7 +10,7 @@ export default function Layout({
     return (
         <>
             <Navbar />
-                <main className="main-container">{children}</main>
+                <main className="main-container">{children}</main> 
             <Footer />
         </>
     )

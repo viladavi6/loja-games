@@ -35,10 +35,8 @@ const GameCarousel = () => {
             <div className={styles.carouselsmall}>
                 {gamesData.map((game) => (
                     <div key={game.id} className={styles.carouselitem}>
-                        <Image src={game.imageUrl} fluid />
-                        <div className={styles['carousel-caption']}>
-                            <h3 className={styles['carousel-title']}>{game.name}</h3>
-                        </div>
+                        <Image src={game.imageUrl} fluid className={styles.smallImage} />
+                        
                     </div>
                 ))}
             </div>

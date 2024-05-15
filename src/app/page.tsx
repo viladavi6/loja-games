@@ -3,11 +3,9 @@ import React from "react";
 import Card from "./components/Card/Card";
 import styles from "./style/Search.module.css";
 
-
 const Home = () => {
   return (
     <>
-    <div>
       <div className={styles.searchContainer}>
         <div className={styles.searchBar}>
           <input
@@ -20,11 +18,10 @@ const Home = () => {
           </button>
         </div>
       </div>
-    </div>
-    <div>
-      <Card />
-    </div>
-  </>
+      <main>
+        <Card />
+      </main>
+    </>
   );
 };
 

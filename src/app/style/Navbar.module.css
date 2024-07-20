@@ -33,5 +33,22 @@
 .store {
     margin-left: 18px;
     margin-bottom: 5px;
+    transition: filter 0.3s ease; 
 }
 
+.store:hover {
+    filter: brightness(0) saturate(100%) invert(60%) sepia(10%) saturate(200%) hue-rotate(120deg) brightness(80%) contrast(50%); 
+}
+
+.wishlist {
+    font-size: small;
+    color: #8c8c8c;
+    text-decoration: none; 
+    transition: color 0.3s ease; 
+    margin-left: 10px; 
+    padding-left: 80%;
+}
+
+.wishlist:hover {
+    color: #ffffff; 
+}

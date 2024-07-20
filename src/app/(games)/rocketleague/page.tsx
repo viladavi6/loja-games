@@ -1,11 +1,11 @@
 "use client"
 import { useState } from 'react';
-import { Container, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import styles from '../../style-games/Free.module.css';
+import Search from '@/app/components/Search/Search';
 
 const Page = () => {
     const [selectedImage, setSelectedImage] = useState("/img/rocketleague/1.jpg");
-    const [description, setDescription] = useState("Descrição do jogo Rocket League");
 
     const handleImageClick = (image) => {
         setSelectedImage(image);
@@ -20,6 +20,8 @@ const Page = () => {
     };
 
     return (
+        <>
+        <Search />
         <div className={styles.container}>
             <header className={styles.title}>
                 <h1>Rocket League</h1>
@@ -53,14 +55,17 @@ const Page = () => {
                                 onClick={() => handleImageClick(`/img/rocketleague/${index}.jpg`)}
                             />
                         ))}
+                        <img
+                            src="https://img.youtube.com/vi/SgSX3gOrj60/0.jpg"
+                            alt="Rocket League Trailer Thumbnail"
+                            className={styles.thumbnail}
+                            onClick={handleTrailerClick}
+                        />
                     </div>
                 </section>
                 <section className={styles.desc}>
                     <h2 className={styles.desctitle}>Descrição</h2>
-                    <p>"Rocket League" é um jogo eletrônico desenvolvido e publicado pela Psyonix. Lançado inicialmente em julho de 2015, o jogo rapidamente se tornou um fenômeno devido à sua jogabilidade única e emocionante.
-                    No mundo de "Rocket League", os jogadores controlam carros impulsionados por foguetes em campos de futebol, onde o objetivo é marcar gols em uma bola gigante. O jogo combina habilidade, estratégia e velocidade, criando uma experiência multiplayer altamente competitiva e viciante.
-                    Além do modo principal de futebol, "Rocket League" oferece uma variedade de modos de jogo, incluindo basquete, hóquei e modos casuais e competitivos. Os jogadores podem personalizar seus carros com uma ampla gama de opções de personalização, desde decalques e pinturas até chapéus e antenas.
-                    O jogo também é conhecido por sua comunidade ativa e engajada, que organiza torneios, eventos e criações de conteúdo personalizado. Com constantes atualizações e suporte da desenvolvedora, "Rocket League" continua a evoluir e atrair jogadores de todas as idades e níveis de habilidade.</p>
+                    <p>"Rocket League" é um jogo eletrônico desenvolvido e publicado pela Psyonix. Lançado inicialmente em julho de 2015, o jogo rapidamente se tornou um fenômeno devido à sua jogabilidade única e emocionante. No mundo de "Rocket League", os jogadores controlam carros impulsionados por foguetes em campos de futebol, onde o objetivo é marcar gols em uma bola gigante. O jogo combina habilidade, estratégia e velocidade, criando uma experiência multiplayer altamente competitiva e viciante. Além do modo principal de futebol, "Rocket League" oferece uma variedade de modos de jogo, incluindo basquete, hóquei e modos casuais e competitivos. Os jogadores podem personalizar seus carros com uma ampla gama de opções de personalização, desde decalques e pinturas até chapéus e antenas. O jogo também é conhecido por sua comunidade ativa e engajada, que organiza torneios, eventos e criações de conteúdo personalizado. Com constantes atualizações e suporte da desenvolvedora, "Rocket League" continua a evoluir e atrair jogadores de todas as idades e níveis de habilidade.</p>
                 </section>
 
                 <div className={styles.buttonsSection}>
@@ -70,6 +75,7 @@ const Page = () => {
                 </div>
             </main>
         </div>
+        </>
     );
 };
 

@@ -11,6 +11,9 @@ export default function Navbar() {
                 <img className={styles.bar} src={"/img/bar.png"} alt="bar" />
                 <img className={styles.store} src={"/img/store.png"} width={35} height={35} alt={"store"} />
             </Link>
+            <Link href="/Wishlist" className={styles.wishlist}>
+                Lista de Desejos
+            </Link>
             <Link href="/login" className={styles.login}>
                 <img src={"/img/user.png"} width={30} height={35} alt="login" />
             </Link>

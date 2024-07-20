@@ -1,18 +1,18 @@
 "use client"
 import { useState } from 'react';
-import { Container, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import styles from '../../style-games/Global.module.css';
+import Search from '@/app/components/Search/Search';
 
 const Page = () => {
     const [selectedImage, setSelectedImage] = useState("/img/battlefront/1.jpg");
-    const [description, setDescription] = useState("Descrição do jogo Star Wars - Battlefront");
 
     const handleImageClick = (image) => {
         setSelectedImage(image);
     };
 
     const handleTrailerClick = () => {
-        setSelectedImage("https://www.youtube.com/watch?v=V2xp-qtUlsQ");
+        setSelectedImage("https://www.youtube.com/embed/V2xp-qtUlsQ?autoplay=1&mute=1");
     };
 
     const isYoutubeVideo = (url) => {
@@ -20,6 +20,8 @@ const Page = () => {
     };
 
     return (
+        <>
+        <Search />
         <div className={styles.container}>
             <header className={styles.title}>
                 <h1>Star Wars - Battlefront</h1>
@@ -32,7 +34,7 @@ const Page = () => {
                                 width="60%"
                                 height="400"
                                 src={selectedImage}
-                                title="Rocket League Trailer"
+                                title="Star Wars - Battlefront Trailer"
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
@@ -48,11 +50,17 @@ const Page = () => {
                             <img
                                 key={index}
                                 src={`/img/battlefront/${index}.jpg`}
-                                alt={`God of War Screenshot ${index}`}
+                                alt={`Star Wars Battlefront Screenshot ${index}`}
                                 className={styles.thumbnail}
                                 onClick={() => handleImageClick(`/img/battlefront/${index}.jpg`)}
                             />
                         ))}
+                        <img
+                            src="https://img.youtube.com/vi/V2xp-qtUlsQ/0.jpg"
+                            alt="Star Wars Battlefront Trailer Thumbnail"
+                            className={styles.thumbnail}
+                            onClick={handleTrailerClick}
+                        />
                     </div>
                 </section>
                 <section className={styles.desc}>
@@ -67,6 +75,7 @@ const Page = () => {
                 </div>
             </main>
         </div>
+        </>
     );
 };
 

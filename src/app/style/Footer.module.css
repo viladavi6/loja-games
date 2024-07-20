@@ -1,13 +1,13 @@
 .footer {
     display: flex;
     background-color: #18181C;
-    height: 400px;
+    height: 40vh; 
     border-top: 3px solid #111;
     color: #fff;
     position: relative; 
     bottom: 0; 
     width: 100%; 
-    margin-top: 100px;
+    margin-top: 10vh; 
 }
 
 .footer span {
@@ -16,6 +16,16 @@
 
 .list {
     text-align: left;
-    margin: 20px 0 0 20px;
-    font-size: 12px;
+    margin: 2% 0 0 2%; 
+    font-size: small; 
+}
+
+.list a {
+    color: #8c8c8c; 
+    text-decoration: none; 
+    transition: color 0.3s ease; 
+}
+
+.list a:hover {
+    color: #ffffff; 
 }

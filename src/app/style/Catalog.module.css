@@ -1,0 +1,57 @@
+.catalogTitle {
+    margin: 5% 0;
+    font-weight: bold;
+    font-size: x-large;
+    text-align: center;
+}
+
+.catalogContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+    text-align: center;
+}
+
+.catalogGrid {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    gap: 1%;
+    width: 100%;
+    margin: auto;
+}
+
+.card {
+    flex: 1 1 15%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.cardImage {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.cardTitle {
+    margin-top: 2%;
+    font-weight: bold;
+    font-size: small;
+    color: #8c8c8c;
+}
+
+.cardPrice {
+    margin-top: 5px;
+    font-size: small;
+    color: #888;
+}

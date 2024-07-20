@@ -1,18 +1,18 @@
 "use client"
 import { useState } from 'react';
-import { Container, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import styles from '../../style-games/Global.module.css';
+import Search from '@/app/components/Search/Search';
 
 const Page = () => {
     const [selectedImage, setSelectedImage] = useState("/img/godofwar/1.jpg");
-    const [description, setDescription] = useState("Descrição do jogo God of War");
 
     const handleImageClick = (image) => {
         setSelectedImage(image);
     };
 
     const handleTrailerClick = () => {
-        setSelectedImage("https://youtu.be/FyIwEFXOcaE?si=AH6rdRVuHFrGAX0L");
+        setSelectedImage("https://www.youtube.com/embed/FyIwEFXOcaE");
     };
 
     const isYoutubeVideo = (url) => {
@@ -20,6 +20,8 @@ const Page = () => {
     };
 
     return (
+        <>
+        <Search />
         <div className={styles.container}>
             <header className={styles.title}>
                 <h1>God of War</h1>
@@ -32,7 +34,7 @@ const Page = () => {
                                 width="60%"
                                 height="400"
                                 src={selectedImage}
-                                title="Rocket League Trailer"
+                                title="God of War Trailer"
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
@@ -53,11 +55,17 @@ const Page = () => {
                                 onClick={() => handleImageClick(`/img/godofwar/${index}.jpg`)}
                             />
                         ))}
+                        <img
+                            src="https://img.youtube.com/vi/FyIwEFXOcaE/0.jpg"
+                            alt="God of War Trailer Thumbnail"
+                            className={styles.thumbnail}
+                            onClick={handleTrailerClick}
+                        />
                     </div>
                 </section>
                 <section className={styles.desc}>
                     <h2 className={styles.desctitle}>Descrição</h2>
-                    <p>"God of War" (2018) é um jogo de ação-aventura desenvolvido pela Santa Monica Studio. Ambientado na mitologia nórdica, o jogo segue Kratos e seu filho Atreus em uma jornada épica para espalhar as cinzas da esposa de Kratos no pico mais alto dos nove reinos. Com uma nova perspectiva de câmera, combates intensos usando o Leviathan Axe e gráficos impressionantes, "God of War" oferece uma experiência envolvente e emocional que foi amplamente aclamada pela crítica e vencedora de vários prêmios, incluindo Jogo do Ano. personalizado. Com constantes atualizações e suporte da desenvolvedora, "Rocket League" continua a evoluir e atrair jogadores de todas as idades e níveis de habilidade.</p>
+                    <p>"God of War" (2018) é um jogo de ação-aventura desenvolvido pela Santa Monica Studio. Ambientado na mitologia nórdica, o jogo segue Kratos e seu filho Atreus em uma jornada épica para espalhar as cinzas da esposa de Kratos no pico mais alto dos nove reinos. Com uma nova perspectiva de câmera, combates intensos usando o Leviathan Axe e gráficos impressionantes, "God of War" oferece uma experiência envolvente e emocional que foi amplamente aclamada pela crítica e vencedora de vários prêmios, incluindo Jogo do Ano.</p>
                 </section>
 
                 <div className={styles.buttonsSection}>
@@ -67,6 +75,7 @@ const Page = () => {
                 </div>
             </main>
         </div>
+        </>
     );
 };
 

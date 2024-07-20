@@ -1,18 +1,18 @@
 "use client"
 import { useState } from 'react';
-import { Container, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import styles from '../../style-games/Global.module.css';
+import Search from '@/app/components/Search/Search';
 
 const Page = () => {
     const [selectedImage, setSelectedImage] = useState("/img/sifu/1.jpg");
-    const [description, setDescription] = useState("Descrição do jogo Sifu");
 
     const handleImageClick = (image) => {
         setSelectedImage(image);
     };
 
     const handleTrailerClick = () => {
-        setSelectedImage("https://youtu.be/Kx3R2CNhLWA?si=Ah97n7qjgs8278Pd");
+        setSelectedImage("https://www.youtube.com/embed/Kx3R2CNhLWA?autoplay=1&mute=1");
     };
 
     const isYoutubeVideo = (url) => {
@@ -20,6 +20,8 @@ const Page = () => {
     };
 
     return (
+        <>
+        <Search/>
         <div className={styles.container}>
             <header className={styles.title}>
                 <h1>Sifu</h1>
@@ -32,13 +34,13 @@ const Page = () => {
                                 width="60%"
                                 height="400"
                                 src={selectedImage}
-                                title="Rocket League Trailer"
+                                title="Sifu Trailer"
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
                             ></iframe>
                         ) : (
-                            <img src={selectedImage} alt="Sigu" className={styles.mainImage} />
+                            <img src={selectedImage} alt="Sifu" className={styles.mainImage} />
                         )}
                     </div>
                 </section>
@@ -53,6 +55,12 @@ const Page = () => {
                                 onClick={() => handleImageClick(`/img/sifu/${index}.jpg`)}
                             />
                         ))}
+                        <img
+                            src="https://img.youtube.com/vi/Kx3R2CNhLWA/0.jpg"
+                            alt="Sifu Trailer Thumbnail"
+                            className={styles.thumbnail}
+                            onClick={handleTrailerClick}
+                        />
                     </div>
                 </section>
                 <section className={styles.desc}>
@@ -67,6 +75,7 @@ const Page = () => {
                 </div>
             </main>
         </div>
+        </>
     );
 };
 

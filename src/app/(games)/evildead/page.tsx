@@ -1,18 +1,18 @@
 "use client"
 import { useState } from 'react';
-import { Container, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import styles from '../../style-games/Global.module.css';
+import Search from '@/app/components/Search/Search';
 
 const Page = () => {
     const [selectedImage, setSelectedImage] = useState("/img/evildead/1.jpg");
-    const [description, setDescription] = useState("Descrição do jogo Evil Dead");
 
     const handleImageClick = (image) => {
         setSelectedImage(image);
     };
 
     const handleTrailerClick = () => {
-        setSelectedImage("https://youtu.be/LiZqKiamYSs?si=ONIFKnMLKEsFTMVQ");
+        setSelectedImage("https://www.youtube.com/embed/LiZqKiamYSs");
     };
 
     const isYoutubeVideo = (url) => {
@@ -20,6 +20,8 @@ const Page = () => {
     };
 
     return (
+        <>
+        <Search />
         <div className={styles.container}>
             <header className={styles.title}>
                 <h1>Evil Dead</h1>
@@ -32,7 +34,7 @@ const Page = () => {
                                 width="60%"
                                 height="400"
                                 src={selectedImage}
-                                title="Evil dead Trailer"
+                                title="Evil Dead Trailer"
                                 frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
@@ -53,6 +55,12 @@ const Page = () => {
                                 onClick={() => handleImageClick(`/img/evildead/${index}.jpg`)}
                             />
                         ))}
+                        <img
+                            src="https://img.youtube.com/vi/LiZqKiamYSs/0.jpg"
+                            alt="Evil Dead Trailer Thumbnail"
+                            className={styles.thumbnail}
+                            onClick={handleTrailerClick}
+                        />
                     </div>
                 </section>
                 <section className={styles.desc}>
@@ -67,6 +75,7 @@ const Page = () => {
                 </div>
             </main>
         </div>
+        </>
     );
 };
 

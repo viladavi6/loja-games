@@ -1,18 +1,18 @@
 "use client"
 import { useState } from 'react';
-import { Container, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import styles from '../../style-games/Global.module.css';
+import Search from '../../components/Search/Search';
 
 const Page = () => {
     const [selectedImage, setSelectedImage] = useState("/img/dyinglight2/1.jpg");
-    const [description, setDescription] = useState("Descrição do jogo Dying Light 2");
 
     const handleImageClick = (image) => {
         setSelectedImage(image);
     };
 
     const handleTrailerClick = () => {
-        setSelectedImage("https://youtu.be/2MD4gTitmzw?si=IwgR13vCHztXQKJv");
+        setSelectedImage("https://www.youtube.com/embed/2MD4gTitmzw");
     };
 
     const isYoutubeVideo = (url) => {
@@ -20,6 +20,8 @@ const Page = () => {
     };
 
     return (
+        <>
+        <Search />
         <div className={styles.container}>
             <header className={styles.title}>
                 <h1>Dying Light 2</h1>
@@ -53,6 +55,12 @@ const Page = () => {
                                 onClick={() => handleImageClick(`/img/dyinglight2/${index}.jpg`)}
                             />
                         ))}
+                        <img
+                            src="https://img.youtube.com/vi/2MD4gTitmzw/0.jpg"
+                            alt="Dying Light 2 Trailer Thumbnail"
+                            className={styles.thumbnail}
+                            onClick={handleTrailerClick}
+                        />
                     </div>
                 </section>
                 <section className={styles.desc}>
@@ -67,6 +75,7 @@ const Page = () => {
                 </div>
             </main>
         </div>
+        </>
     );
 };
 

@@ -53,15 +53,16 @@
     position: relative;
     width: 100%;
     height: auto;
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
 }
 
 .carouselitem img {
     width: 65%;
     height: auto;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 

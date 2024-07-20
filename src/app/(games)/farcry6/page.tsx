@@ -7,7 +7,7 @@ import Search from '@/app/components/Search/Search';
 const Page = () => {
     const [selectedImage, setSelectedImage] = useState("/img/farcry6/1.png");
 
-    const handleImageClick = (image) => {
+    const handleImageClick = (image: string) => {
         setSelectedImage(image);
     };
 
@@ -15,7 +15,7 @@ const Page = () => {
         setSelectedImage("https://www.youtube.com/embed/yzCZyJSGub4");
     };
 
-    const isYoutubeVideo = (url) => {
+    const isYoutubeVideo = (url: string) => {
         return url.includes("youtube");
     };
 

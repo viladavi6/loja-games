@@ -18,19 +18,18 @@
     padding: 8px 16px;
     background-color: #202020;
     color: white;
-    font-size: 16px;
-  }
-  
-  .searchButton {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-  }
-  
-  .searchIcon {
-    width: 20px;
-    height: 20px;
+    font-size: small;
   }
 
- 
+ .gratuitos {
+    font-size: small;
+    color: #8c8c8c;
+    text-decoration: none; 
+    transition: color 0.3s ease; 
+    margin-left: 3%; 
+    
+ }
+
+ .gratuitos:hover {
+  color: #ffffff; 
+}

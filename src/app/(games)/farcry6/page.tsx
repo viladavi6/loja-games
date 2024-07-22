@@ -5,7 +5,7 @@ import styles from '../../style-games/Global.module.css';
 import Search from '@/app/components/Search/Search';
 
 const Page = () => {
-    const [selectedImage, setSelectedImage] = useState("/img/farcry6/1.png");
+    const [selectedImage, setSelectedImage] = useState("/img/farcry6/1.jpg");
 
     const handleImageClick = (image: string) => {
         setSelectedImage(image);
@@ -49,10 +49,10 @@ const Page = () => {
                         {Array.from({ length: 3 }, (_, i) => i + 1).map((index) => (
                             <img
                                 key={index}
-                                src={`/img/farcry6/${index}.png`}
+                                src={`/img/farcry6/${index}.jpg`}
                                 alt={`Far Cry 6 Screenshot ${index}`}
                                 className={styles.thumbnail}
-                                onClick={() => handleImageClick(`/img/farcry6/${index}.png`)}
+                                onClick={() => handleImageClick(`/img/farcry6/${index}.jpg`)}
                             />
                         ))}
                         <img

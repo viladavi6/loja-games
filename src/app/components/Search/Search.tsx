@@ -12,6 +12,8 @@ export default function Search() {
                         className={styles.searchInput}
                     />
                     <Link href='/jogosgratuitos' className={styles.gratuitos}>Jogos Gratuitos</Link>
+                    <Link href="/Wishlist" className={styles.wishlist}>Lista de Desejos</Link>
+                    <Link href='/cart' className={styles.cart}>Carrinho</Link>
                 </div>
             </div>
         </>

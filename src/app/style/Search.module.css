@@ -27,9 +27,32 @@
     text-decoration: none; 
     transition: color 0.3s ease; 
     margin-left: 3%; 
-    
  }
 
  .gratuitos:hover {
   color: #ffffff; 
+}
+
+.cart {
+  font-size: small;
+  color: #8c8c8c;
+  text-decoration: none; 
+  transition: color 0.3s ease; 
+  margin-left: 3%; 
+}
+
+.cart:hover {
+color: #ffffff; 
+}
+
+.wishlist {
+  font-size: small;
+  color: #8c8c8c;
+  text-decoration: none; 
+  transition: color 0.3s ease; 
+  margin-left: 3%; 
+}
+
+.wishlist:hover {
+color: #ffffff; 
 }

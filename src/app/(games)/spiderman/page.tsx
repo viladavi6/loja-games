@@ -5,7 +5,7 @@ import styles from '../../style-games/Global.module.css';
 import Search from '@/app/components/Search/Search';
 
 const Page = () => {
-    const [selectedImage, setSelectedImage] = useState("/img/spiderman/1.png");
+    const [selectedImage, setSelectedImage] = useState("/img/spiderman/1.jpg");
 
     const handleImageClick = (image: string) => {
         setSelectedImage(image);
@@ -49,10 +49,10 @@ const Page = () => {
                         {Array.from({ length: 3 }, (_, i) => i + 1).map((index) => (
                             <img
                                 key={index}
-                                src={`/img/spiderman/${index}.png`}
+                                src={`/img/spiderman/${index}.jpg`}
                                 alt={`Spider-Man Screenshot ${index}`}
                                 className={styles.thumbnail}
-                                onClick={() => handleImageClick(`/img/spiderman/${index}.png`)}
+                                onClick={() => handleImageClick(`/img/spiderman/${index}.jpg`)}
                             />
                         ))}
                         <img

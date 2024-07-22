@@ -9,8 +9,6 @@ const Home = () => {
       <Search />
       <main>
         <Card />
-      </main>
-      <main>
         <Catalog />
       </main>
     </>

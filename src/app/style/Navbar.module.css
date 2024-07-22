@@ -19,10 +19,6 @@
     margin-left: 1em;
 }
 
-.login {
-    text-align: right;
-}
-
 .bar {
     margin-left: 20px;
     height: 25px;
@@ -37,5 +33,14 @@
 }
 
 .store:hover {
+    filter: brightness(0) saturate(100%) invert(60%) sepia(10%) saturate(200%) hue-rotate(120deg) brightness(80%) contrast(50%); 
+}
+
+.login {
+    transition: filter 0.3s ease; 
+    text-align: right;
+}
+
+.login:hover {
     filter: brightness(0) saturate(100%) invert(60%) sepia(10%) saturate(200%) hue-rotate(120deg) brightness(80%) contrast(50%); 
 }

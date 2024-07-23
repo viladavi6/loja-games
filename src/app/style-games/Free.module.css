@@ -5,45 +5,46 @@
 }
 
 .title {
-    margin-bottom: 20px;
+    margin-bottom: 3%;
+    margin-top: 5%;
     font-weight: bold;
-    font-size: 24px;
+    font-size: large;
     text-align: center;
 }
 
 .mainBox {
-    margin-bottom: 20px;
+    margin-bottom: 5%; 
     display: flex;
     justify-content: center;
     width: 100%;
 }
 
 .mainImage {
-    width: 60%;
+    width: 800px;
     object-fit: cover;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .imageSelector {
-    margin-top: 5%;
+    margin-top: 2%;
     width: 100%;
     display: flex;
     justify-content: center;
+    white-space: nowrap; 
 }
 
 .thumbnailContainer {
-    width: 60%;
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .thumbnail {
     cursor: pointer;
-    width: 48%;
-    max-width: 180px;
-    margin: 10px;
+    width: 100px; 
+    height: 60px; 
     border-radius: 5px;
     transition: transform 0.3s ease;
 }

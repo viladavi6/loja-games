@@ -1,7 +1,7 @@
-"use client"
+"use client";
 import { useState, useEffect } from 'react';
 import { Image } from 'react-bootstrap';
-import Link from 'next/link'; 
+import Link from 'next/link';
 import styles from "../../style/Card.module.css";
 
 const gamesData = [
@@ -40,6 +40,7 @@ const GameCarousel = () => {
                     <Link href={game.route} key={game.id}>
                         <div className={styles.carouselitem}>
                             <Image src={game.imageUrl} fluid className={styles.smallImage} />
+                            <p className={styles.cardTitle}>{game.name}</p>
                         </div>
                     </Link>
                 ))}

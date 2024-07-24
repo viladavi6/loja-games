@@ -12,7 +12,7 @@ const Page = () => {
     };
 
     const handleTrailerClick = () => {
-        setSelectedImage("https://www.youtube.com/embed/zyJvCq4HvQ4");
+        setSelectedImage("https://www.youtube.com/embed/fCyY487J3aQ");
     };
 
     const isYoutubeVideo = (url: string) => {
@@ -56,7 +56,7 @@ const Page = () => {
                             />
                         ))}
                         <img
-                            src="https://img.youtube.com/vi/zyJvCq4HvQ4/0.jpg"
+                            src="https://img.youtube.com/vi/fCyY487J3aQ/0.jpg"
                             alt="Alan Wake 2 Trailer Thumbnail"
                             className={styles.thumbnail}
                             onClick={handleTrailerClick}

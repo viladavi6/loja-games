@@ -8,7 +8,7 @@ const Login = () => {
       <div className={styles.backg}>
         <Image src={"/img/logo.png"} width={100} height={80} alt={"TakeControl"} />
         <form className={styles.form}>
-          <h2>Entrar ou Cadastrar</h2>
+          <h2 className={styles.title}>Entrar ou Cadastrar</h2>
           <div>
             <input type="text" id="username" placeholder='usuário' />
           </div>

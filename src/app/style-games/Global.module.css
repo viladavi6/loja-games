@@ -10,6 +10,7 @@
     font-weight: bold;
     font-size: large;
     text-align: center;
+    color: white;
 }
 
 .mainBox {
@@ -82,6 +83,7 @@
     text-align: justify;
     padding: 5%;
     margin: 5%;
+    color: white;
 }
 
 .desctitle {

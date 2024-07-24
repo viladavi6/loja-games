@@ -12,7 +12,7 @@ const Page = () => {
     };
 
     const handleTrailerClick = () => {
-        setSelectedImage("https://www.youtube.com/embed/sSB4QcQMm6E?t=21");
+        setSelectedImage("https://www.youtube.com/watch?v=fCyY487J3aQ&t=1s");
     };
 
     const isYoutubeVideo = (url: string) => {

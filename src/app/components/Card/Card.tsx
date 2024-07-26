@@ -5,7 +5,7 @@ import Link from 'next/link';
 import styles from "../../style/Card.module.css";
 
 const gamesData = [
-    { id: 1, name: 'Rocket League', imageUrl: '/img/games/rocketleague.jpg', description: 'Futebol com carros? É aqui!', route: '/rocketleague' },
+    { id: 1, name: 'Hollow Knight', imageUrl: '/img/games/hollowknight.jpg', description: 'Salve Hollownest.', route: '/hollowknight' },
     { id: 2, name: 'God of War', imageUrl: '/img/games/godofwar.jpg', description: 'Kratos está de volta com o seu filho em um novo universo.', route: '/godofwar' },
     { id: 3, name: 'Star Wars - Battlefront', imageUrl: '/img/games/battlefront.jpg', description: 'Mais um grande jogo da série amada por muitos.', route: '/starwars-battlefront' },
     { id: 4, name: 'Dying Light 2', imageUrl: '/img/games/dyinglight2.jpg', description: 'Como o nome sugere, continue humano.', route: '/dyinglight2' },

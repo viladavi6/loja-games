@@ -67,6 +67,7 @@
     padding: 15px 30px;
     margin: 0 2%;
     color: white;
+    font-size: small;
 }
 
 .buyButton:hover,

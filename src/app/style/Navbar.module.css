@@ -1,46 +1,89 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1em 1.2em;
-    margin-bottom: 2em;
-    background-color: #18181C;
-    color: #ffffff;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 1.2em;
+  margin-bottom: 2em;
+  background-color: #18181C;
+  color: #ffffff;
+  width: 100%;
 }
 
 .logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo h1 {
-    margin-left: 1em;
+  margin-left: 1em;
 }
 
 .bar {
-    margin-left: 20px;
-    height: 25px;
-    width: 1px;   
-    margin-bottom: 5px;
+  margin-left: 20px;
+  height: 25px;
+  width: 1px;   
+  margin-bottom: 5px;
 }
 
 .store {
-    margin-left: 18px;
-    margin-bottom: 5px;
-    transition: filter 0.3s ease; 
+  margin-left: 18px;
+  margin-bottom: 5px;
+  transition: filter 0.3s ease; 
 }
 
 .store:hover {
-    filter: brightness(0) saturate(100%) invert(60%) sepia(10%) saturate(200%) hue-rotate(120deg) brightness(80%) contrast(50%); 
+  filter: brightness(0) saturate(100%) invert(60%) sepia(10%) saturate(200%) hue-rotate(120deg) brightness(80%) contrast(50%); 
 }
 
 .login {
-    transition: filter 0.3s ease; 
-    text-align: right;
+  transition: filter 0.3s ease; 
+  text-align: right;
 }
 
 .login:hover {
-    filter: brightness(0) saturate(100%) invert(60%) sepia(10%) saturate(200%) hue-rotate(120deg) brightness(80%) contrast(50%); 
+  filter: brightness(0) saturate(100%) invert(60%) sepia(10%) saturate(200%) hue-rotate(120deg) brightness(80%) contrast(50%); 
+}
+
+.userButton {
+  color: #8c8c8c;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0.5em;
+}
+
+.userButton:hover {
+  color: #ffffff;
+}
+
+.dropdownWrapper {
+  position: relative;
+}
+
+.dropdownMenu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #18181C;
+  border: 1px solid #8c8c8c;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.dropdownItem {
+  color: #8c8c8c;
+  background: none;
+  border: none;
+  padding: 0.5em;
+  cursor: pointer;
+  text-align: left;
+}
+
+.dropdownItem:hover {
+  color: #ffffff;
 }

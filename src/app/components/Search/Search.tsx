@@ -19,7 +19,7 @@ export default function Search() {
                         Jogos Gratuitos
                     </Link>
                 )}
-                <Link href="/Wishlist" className={styles.wishlist}>
+                <Link href="/wishlist" className={styles.wishlist}>
                     Lista de Desejos
                 </Link>
                 <Link href="/cart" className={styles.cart}>

@@ -72,6 +72,7 @@ const ValorantPage = () => {
                         <Button className={`${styles.buyButton} ${styles.priceCard}`}>Grátis</Button>
                         <Button className={styles.buyButton}>COMPRAR</Button>
                         <Button className={styles.cartButton}>ADICIONAR AO CARRINHO</Button>
+                        <Button className={styles.cartButton}>ADICIONAR A LISTA DE DESEJOS</Button>
                     </div>
                 </main>
             </div>

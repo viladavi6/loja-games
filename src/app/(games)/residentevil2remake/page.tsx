@@ -69,9 +69,10 @@ const Page = () => {
                 </section>
 
                 <div className={styles.buttonsSection}>
-                    <Button className={`${styles.buyButton} ${styles.priceCard}`}>R$200</Button>
+                    <Button className={`${styles.buyButton} ${styles.priceCard}`}>R$250</Button>
                     <Button className={styles.buyButton}>COMPRAR</Button>
                     <Button className={styles.cartButton}>ADICIONAR AO CARRINHO</Button>
+                    <Button className={styles.cartButton}>ADICIONAR A LISTA DE DESEJOS</Button>
                 </div>
             </main>
         </div>

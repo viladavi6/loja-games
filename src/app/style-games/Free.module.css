@@ -72,6 +72,7 @@
 .buyButton:hover,
 .cartButton:hover {
     transform: scale(1.05);
+    font-size: small;
 }
 
 .priceCard {

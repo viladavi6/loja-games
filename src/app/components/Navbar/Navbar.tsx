@@ -34,7 +34,7 @@ export default function Navbar() {
   const handleLogout = () => {
     Cookies.remove('session');
     setUsername(null);
-    window.location.href = '/login'; // Redireciona para a página de login
+    window.location.href = '/login'; 
   };
 
   const handleDropdownToggle = () => {

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
+import Cookies from 'js-cookie';
 import styles from '../../style-games/Free.module.css';
 import Search from '@/app/components/Search/Search';
 
@@ -19,12 +20,45 @@ const HonkaiImpactPage = () => {
         return url.includes("youtube");
     };
 
+    const handleAddToWishlist = async () => {
+        const sessionCookie = Cookies.get('session');
+        if (!sessionCookie) {
+            window.location.href = '/login';
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/wishlist', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: "Honkai Impact 3rd",
+                    img: '/img/games/honkaiimpact.jpg',
+                    link: '/honkaiimpact',
+                }),
+            });
+
+            if (response.ok) {
+                alert('Adicionado à lista de desejos');
+            } else {
+                const errorText = await response.text();
+                console.error('Failed to add to wishlist:', errorText);
+                alert('Não foi possível adicionar à lista de desejos');
+            }
+        } catch (error) {
+            console.error('Error adding to wishlist:', error);
+            alert('Erro ao adicionar à lista de desejos');
+        }
+    };
+
     return (
         <>
             <Search />
             <div className={styles.container}>
                 <header className={styles.title}>
-                    <h1>Honkai Impact</h1>
+                    <h1>Honkai Impact 3rd</h1>
                 </header>
                 <main>
                     <section className={styles.mainSection}>
@@ -72,7 +106,9 @@ const HonkaiImpactPage = () => {
                         <Button className={`${styles.buyButton} ${styles.priceCard}`}>Grátis</Button>
                         <Button className={styles.buyButton}>COMPRAR</Button>
                         <Button className={styles.cartButton}>ADICIONAR AO CARRINHO</Button>
-                        <Button className={styles.cartButton}>ADICIONAR A LISTA DE DESEJOS</Button>
+                        <Button className={styles.cartButton} onClick={handleAddToWishlist}>
+                            ADICIONAR A LISTA DE DESEJOS
+                        </Button>
                     </div>
                 </main>
             </div>

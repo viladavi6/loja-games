@@ -1,6 +1,7 @@
 "use client";
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
+import Cookies from 'js-cookie';
 import styles from '../../style-games/Free.module.css';
 import Search from '@/app/components/Search/Search';
 
@@ -15,8 +16,39 @@ const Destiny2Page = () => {
         setSelectedImage("https://www.youtube.com/embed/RfUoz1_i5_E");
     };
 
-    const isYoutubeVideo = (url: string) => {
-        return url.includes("youtube");
+    const isYoutubeVideo = (url: string) => url.includes("youtube");
+
+    const handleAddToWishlist = async () => {
+        const sessionCookie = Cookies.get('session');
+        if (!sessionCookie) {
+            window.location.href = '/login';
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/wishlist', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: "Destiny 2",
+                    img: '/img/games/destiny2.jpg',
+                    link: '/destiny2',
+                }),
+            });
+
+            if (response.ok) {
+                alert('Adicionado à lista de desejos');
+            } else {
+                const errorText = await response.text();
+                console.error('Failed to add to wishlist:', errorText);
+                alert('Não foi possível adicionar à lista de desejos');
+            }
+        } catch (error) {
+            console.error('Error adding to wishlist:', error);
+            alert('Erro ao adicionar à lista de desejos');
+        }
     };
 
     return (
@@ -40,7 +72,7 @@ const Destiny2Page = () => {
                                     allowFullScreen
                                 ></iframe>
                             ) : (
-                                <img src={selectedImage} alt="Destiny 2" className={styles.mainImage} />
+                                <img src={selectedImage} alt="Destiny 2 Screenshot" className={styles.mainImage} />
                             )}
                         </div>
                     </section>
@@ -72,7 +104,9 @@ const Destiny2Page = () => {
                         <Button className={`${styles.buyButton} ${styles.priceCard}`}>Grátis</Button>
                         <Button className={styles.buyButton}>COMPRAR</Button>
                         <Button className={styles.cartButton}>ADICIONAR AO CARRINHO</Button>
-                        <Button className={styles.cartButton}>ADICIONAR A LISTA DE DESEJOS</Button>
+                        <Button className={styles.cartButton} onClick={handleAddToWishlist}>
+                            ADICIONAR À LISTA DE DESEJOS
+                        </Button>
                     </div>
                 </main>
             </div>

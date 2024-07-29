@@ -24,6 +24,17 @@ async function initializeDatabase(): Promise<void> {
       birthdate DATE NOT NULL
     );
   `);
+
+  // Criar a tabela wishlist se não existir
+  await db.exec(`
+    CREATE TABLE IF NOT EXISTS wishlist (
+      user_id INTEGER NOT NULL,
+      title TEXT NOT NULL,
+      img TEXT NOT NULL,
+      link TEXT NOT NULL,
+      PRIMARY KEY (user_id, title)
+    );
+  `);
 }
 
 // Garantir que o banco de dados esteja inicializado

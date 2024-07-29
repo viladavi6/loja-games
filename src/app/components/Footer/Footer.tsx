@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import styles from "../../style/Footer.module.css";
@@ -15,15 +15,14 @@ export default function Footer() {
                     <Col className={styles.list}>
                         {pathname !== '/contacts' && (
                             <ul>
-                                <Link href="/contacts">Contatos</Link>
-                            </ul>
-                        )}    
-                        {pathname !== '/terms' && (
-                            <ul>
-                                <Link href="/terms">Termos de Uso</Link>
+                                <li><Link href="/contacts">Contatos</Link></li>
                             </ul>
                         )}
-                        
+                        {pathname !== '/terms' && (
+                            <ul>
+                                <li><Link href="/terms">Termos de Uso</Link></li>
+                            </ul>
+                        )}
                         <hr className={styles.horizontalLine} />
                         <p className={styles.text}>
                             © 2024, Take Control, Inc. Todos os direitos reservados. Take Control, o logotipo da Take Control, e todos os nomes de produtos associados são marcas comerciais ou registradas da Take Control, Inc. nos Estados Unidos da América e em outros lugares. Outras marcas e nomes de produtos são marcas registradas de seus respectivos donos.

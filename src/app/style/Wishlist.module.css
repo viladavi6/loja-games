@@ -1,0 +1,57 @@
+.container {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.wishlistTitle {
+  margin-bottom: 5%;
+  font-size: large;
+}
+
+.listGroup {
+  text-align: center;
+}
+
+.wishlistItem {
+  padding: 2%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 3%;
+  width: 100%;
+}
+
+.gameInfo {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.gameImage {
+  width: 20%;
+  height: auto;
+  object-fit: cover;
+  margin-right: 5%;
+}
+
+.gameTitle {
+  flex: 1;
+  color: #ffff;
+}
+
+.removeButton {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  margin-left: 5%;
+}
+
+.removeButton:hover {
+  background-color: #c82333;
+}

@@ -1,11 +1,13 @@
 "use client";
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
+import Cookies from 'js-cookie';
 import styles from '../../style-games/Free.module.css';
 import Search from '@/app/components/Search/Search';
 
 const TheSims4Page = () => {
     const [selectedImage, setSelectedImage] = useState("/img/thesims4/1.png");
+    const [isInWishlist, setIsInWishlist] = useState(false);
 
     const handleImageClick = (image: string) => {
         setSelectedImage(image);
@@ -17,6 +19,40 @@ const TheSims4Page = () => {
 
     const isYoutubeVideo = (url: string) => {
         return url.includes("youtube");
+    };
+
+    const handleWishlistClick = async () => {
+        const sessionCookie = Cookies.get('session');
+        if (!sessionCookie) {
+            window.location.href = '/login';
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/wishlist', {
+                method: isInWishlist ? 'DELETE' : 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: "The Sims 4",
+                    img: '/img/games/thesims4.jpg',
+                    link: '/thesims4',
+                }),
+            });
+
+            if (response.ok) {
+                setIsInWishlist(!isInWishlist);
+                alert(isInWishlist ? 'Removido da lista de desejos' : 'Adicionado à lista de desejos');
+            } else {
+                const errorText = await response.text();
+                console.error('Failed to update wishlist:', errorText);
+                alert('Não foi possível atualizar a lista de desejos');
+            }
+        } catch (error) {
+            console.error('Error updating wishlist:', error);
+            alert('Erro ao atualizar a lista de desejos');
+        }
     };
 
     return (
@@ -72,7 +108,12 @@ const TheSims4Page = () => {
                         <Button className={`${styles.buyButton} ${styles.priceCard}`}>Grátis</Button>
                         <Button className={styles.buyButton}>COMPRAR</Button>
                         <Button className={styles.cartButton}>ADICIONAR AO CARRINHO</Button>
-                        <Button className={styles.cartButton}>ADICIONAR A LISTA DE DESEJOS</Button>
+                        <Button 
+                            className={styles.cartButton} 
+                            onClick={handleWishlistClick}
+                        >
+                            ADICIONAR À LISTA DE DESEJOS
+                        </Button>
                     </div>
                 </main>
             </div>

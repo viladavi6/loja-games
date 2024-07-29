@@ -1,35 +1,35 @@
 .searchContainer {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 999;
-    background-color: #121212;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: #121212;
 }
-  
-  .searchBar {
-    margin-left: 10%;
-    max-width: 600px; 
-    padding: 10px; 
-  }
-  
-  .searchInput {
-    border: none;
-    border-radius: 20px;
-    padding: 8px 16px;
-    background-color: #202020;
-    color: white;
-    font-size: small;
-  }
 
- .gratuitos {
-    font-size: small;
-    color: #8c8c8c;
-    text-decoration: none; 
-    transition: color 0.3s ease; 
-    margin-left: 3%; 
- }
+.searchBar {
+  margin-left: 10%;
+  max-width: 600px; 
+  padding: 10px; 
+}
 
- .gratuitos:hover {
+.searchInput {
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  background-color: #202020;
+  color: white;
+  font-size: small;
+}
+
+.gratuitos {
+  font-size: small;
+  color: #8c8c8c;
+  text-decoration: none; 
+  transition: color 0.3s ease; 
+  margin-left: 3%; 
+}
+
+.gratuitos:hover {
   color: #ffffff; 
 }
 
@@ -42,7 +42,7 @@
 }
 
 .cart:hover {
-color: #ffffff; 
+  color: #ffffff; 
 }
 
 .wishlist {
@@ -54,5 +54,59 @@ color: #ffffff;
 }
 
 .wishlist:hover {
-color: #ffffff; 
+  color: #ffffff; 
+}
+
+.searchResults {
+  position: absolute; 
+  top: 100%; 
+  width: 100%;
+  max-width: 300px; 
+  background-color: #202020; 
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 5%px; 
+  margin-left: 10%;
+
+}
+
+.searchResults ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.searchResults li {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  margin-bottom: 3%; 
+  border-radius: 10px;
+  background-color: #303030;
+  transition: box-shadow 0.3s ease;
+}
+
+.searchResults li:hover {
+  box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.8); 
+}
+
+.searchResults img {
+  width: 50px; 
+  max-width: 50px; 
+  height: auto; 
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.searchResults span {
+  color: #ffffff;
+  font-size: small; 
+}
+
+.searchResults p {
+  color: #8c8c8c;
+  text-align: center;
 }

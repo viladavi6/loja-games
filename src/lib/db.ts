@@ -21,7 +21,8 @@ async function initializeDatabase(): Promise<void> {
       email TEXT UNIQUE NOT NULL,
       password TEXT NOT NULL,
       cpf TEXT UNIQUE NOT NULL,
-      birthdate DATE NOT NULL
+      birthdate DATE NOT NULL,
+      balance REAL DEFAULT 0
     );
   `);
 
@@ -32,8 +33,37 @@ async function initializeDatabase(): Promise<void> {
       title TEXT NOT NULL,
       img TEXT NOT NULL,
       link TEXT NOT NULL,
-      PRIMARY KEY (user_id, title)
+      PRIMARY KEY (user_id, title),
+      FOREIGN KEY (user_id) REFERENCES users(id)
     );
+  `);
+
+  // Criar a tabela cart se não existir
+  await db.exec(`
+    CREATE TABLE IF NOT EXISTS cart (
+      user_id INTEGER NOT NULL,
+      title TEXT NOT NULL,
+      img TEXT NOT NULL,
+      link TEXT NOT NULL,
+      price REAL NOT NULL,
+      PRIMARY KEY (user_id, title),
+      FOREIGN KEY (user_id) REFERENCES users(id)
+    );
+  `);
+
+  // Criar a tabela gift_cards se não existir
+  await db.exec(`
+    CREATE TABLE IF NOT EXISTS gift_cards (
+      code TEXT PRIMARY KEY,
+      amount REAL
+    );
+  `);
+
+  // Inserir código de gift card padrão (se ainda não existir)
+  await db.exec(`
+    INSERT OR IGNORE INTO gift_cards (code, amount) VALUES
+    ('DEFAULTCODE', 250),
+    ('DEFAULTCODE500', 500)
   `);
 }
 
@@ -46,6 +76,7 @@ initializeDatabase().catch(error => {
 interface DatabaseModule {
   run(query: string, ...params: any[]): Promise<void>;
   all(query: string, ...params: any[]): Promise<any[]>;
+  get(query: string, ...params: any[]): Promise<any>;
 }
 
 // Exportando o módulo de banco de dados
@@ -57,6 +88,10 @@ const db: DatabaseModule = {
   async all(query: string, ...params: any[]): Promise<any[]> {
     const db = await openDb();
     return db.all(query, ...params);
+  },
+  async get(query: string, ...params: any[]): Promise<any> {
+    const db = await openDb();
+    return db.get(query, ...params);
   },
 };
 

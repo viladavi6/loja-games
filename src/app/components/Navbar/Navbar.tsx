@@ -58,6 +58,16 @@ export default function Navbar() {
           </button>
           {showDropdown && (
             <div className={styles.dropdownMenu}>
+              <Link href='/library'>
+                <button className={styles.dropdownItem}>
+                  Biblioteca
+                </button>
+              </Link>
+              <Link href='/redeemcode'>
+                <button className={styles.dropdownItem}>
+                  Resgatar Gift Card
+                </button>
+              </Link>
               <button
                 className={styles.dropdownItem}
                 onClick={handleLogout}

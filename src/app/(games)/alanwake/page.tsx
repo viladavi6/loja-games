@@ -1,5 +1,6 @@
-"use client";
-import { useState } from 'react';
+'use client';
+
+import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import Cookies from 'js-cookie';
 import styles from '../../style-games/Global.module.css';
@@ -7,6 +8,62 @@ import Search from '@/app/components/Search/Search';
 
 const Page = () => {
   const [selectedImage, setSelectedImage] = useState("/img/alanwake/1.png");
+  const [balance, setBalance] = useState<number>(0);
+
+  useEffect(() => {
+    const fetchBalance = async () => {
+      const sessionCookie = Cookies.get('session');
+      if (sessionCookie) {
+        try {
+          const response = await fetch('/api/user/balance');
+          if (response.ok) {
+            const data = await response.json();
+            setBalance(data.balance || 0);
+          } else {
+            console.error('Failed to fetch balance');
+          }
+        } catch (error) {
+          console.error('Error fetching balance:', error);
+        }
+      }
+    };
+
+    fetchBalance();
+  }, []);
+
+  const handleAddToCart = async () => {
+    const sessionCookie = Cookies.get('session');
+    if (!sessionCookie) {
+      window.location.href = '/login';
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: 'Alan Wake',
+          img: '/img/games/alanwake.jpg',
+          link: '/alanwake',
+          price: 250,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert('Adicionado ao carrinho');
+      } else {
+        console.error('Failed to add to cart:', data.error);
+        alert('Não foi possível adicionar ao carrinho');
+      }
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      alert('Erro ao adicionar ao carrinho');
+    }
+  };
 
   const handleAddToWishlist = async () => {
     const sessionCookie = Cookies.get('session');
@@ -22,9 +79,9 @@ const Page = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          title: 'Alan Wake', // Título do jogo
-          img: '/img/games/alanwake.jpg', // Imagem do jogo (ajustar conforme necessário)
-          link: '/alanwake', // Link para a página do jogo
+          title: 'Alan Wake',
+          img: '/img/games/alanwake.jpg',
+          link: '/alanwake',
         }),
       });
 
@@ -56,7 +113,7 @@ const Page = () => {
           </section>
           <section className={styles.imageSelector}>
             <div className={styles.thumbnailContainer}>
-              {/* Imagens e trailers */}
+              {/* Adicione miniaturas de imagens e trailers aqui */}
             </div>
           </section>
           <section className={styles.desc}>
@@ -68,10 +125,8 @@ const Page = () => {
           <div className={styles.buttonsSection}>
             <Button className={`${styles.buyButton} ${styles.priceCard}`}>R$250</Button>
             <Button className={styles.buyButton}>COMPRAR</Button>
-            <Button className={styles.cartButton}>ADICIONAR AO CARRINHO</Button>
-            <Button className={styles.cartButton} onClick={handleAddToWishlist}>
-              ADICIONAR À LISTA DE DESEJOS
-            </Button>
+            <Button className={styles.cartButton} onClick={handleAddToCart}>ADICIONAR AO CARRINHO</Button>
+            <Button className={styles.cartButton} onClick={handleAddToWishlist}>ADICIONAR À LISTA DE DESEJOS</Button>
           </div>
         </main>
       </div>

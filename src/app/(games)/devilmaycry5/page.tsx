@@ -7,6 +7,8 @@ import Search from '@/app/components/Search/Search';
 
 const Page = () => {
     const [selectedImage, setSelectedImage] = useState("/img/dmc5/1.png");
+    const [isAddingWishlist, setIsAddingWishlist] = useState(false);
+    const [isAddingCart, setIsAddingCart] = useState(false);
 
     const handleImageClick = (image: string) => {
         setSelectedImage(image);
@@ -16,9 +18,7 @@ const Page = () => {
         setSelectedImage("https://www.youtube.com/embed/KMSGj9Y2T9Q");
     };
 
-    const isYoutubeVideo = (url: string) => {
-        return url.includes("youtube");
-    };
+    const isYoutubeVideo = (url: string) => url.includes("youtube");
 
     const handleAddToWishlist = async () => {
         const sessionCookie = Cookies.get('session');
@@ -26,6 +26,8 @@ const Page = () => {
             window.location.href = '/login';
             return;
         }
+
+        setIsAddingWishlist(true); // Disable button
 
         try {
             const response = await fetch('/api/wishlist', {
@@ -50,6 +52,46 @@ const Page = () => {
         } catch (error) {
             console.error('Error adding to wishlist:', error);
             alert('Erro ao adicionar à lista de desejos');
+        } finally {
+            setIsAddingWishlist(false); // Re-enable button
+        }
+    };
+
+    const handleAddToCart = async () => {
+        const sessionCookie = Cookies.get('session');
+        if (!sessionCookie) {
+            window.location.href = '/login';
+            return;
+        }
+
+        setIsAddingCart(true); // Disable button
+
+        try {
+            const response = await fetch('/api/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: "Devil May Cry 5",
+                    img: '/img/games/dmc5.jpg',
+                    link: '/dmc5',
+                    price: 250, // Preço do jogo
+                }),
+            });
+
+            if (response.ok) {
+                alert('Adicionado ao carrinho');
+            } else {
+                const errorText = await response.text();
+                console.error('Failed to add to cart:', errorText);
+                alert('Não foi possível adicionar ao carrinho');
+            }
+        } catch (error) {
+            console.error('Error adding to cart:', error);
+            alert('Erro ao adicionar ao carrinho');
+        } finally {
+            setIsAddingCart(false); // Re-enable button
         }
     };
 
@@ -103,9 +145,19 @@ const Page = () => {
                     <div className={styles.buttonsSection}>
                         <Button className={`${styles.buyButton} ${styles.priceCard}`}>R$250</Button>
                         <Button className={styles.buyButton}>COMPRAR</Button>
-                        <Button className={styles.cartButton}>ADICIONAR AO CARRINHO</Button>
-                        <Button className={styles.cartButton} onClick={handleAddToWishlist}>
-                            ADICIONAR À LISTA DE DESEJOS
+                        <Button
+                            className={styles.cartButton}
+                            onClick={handleAddToCart}
+                            disabled={isAddingCart} // Disable button while adding
+                        >
+                            {isAddingCart ? 'Adicionando...' : 'ADICIONAR AO CARRINHO'}
+                        </Button>
+                        <Button
+                            className={styles.cartButton}
+                            onClick={handleAddToWishlist}
+                            disabled={isAddingWishlist} // Disable button while adding
+                        >
+                            {isAddingWishlist ? 'Adicionando...' : 'ADICIONAR À LISTA DE DESEJOS'}
                         </Button>
                     </div>
                 </main>

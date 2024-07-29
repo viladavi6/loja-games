@@ -67,12 +67,13 @@
     padding: 15px 30px;
     margin: 0 2%;
     color: white;
+    font-size: small;
+    margin: 2% 2% 2% 2%;
 }
 
 .buyButton:hover,
 .cartButton:hover {
     transform: scale(1.05);
-    font-size: small;
 }
 
 .priceCard {

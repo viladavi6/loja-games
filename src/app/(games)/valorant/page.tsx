@@ -8,19 +8,24 @@ import Search from '@/app/components/Search/Search';
 const ValorantPage = () => {
     const [selectedImage, setSelectedImage] = useState("/img/valorant/1.png");
     const [isInWishlist, setIsInWishlist] = useState(false);
+    const [isInCart, setIsInCart] = useState(false);
 
+    // Handle image clicks to change the selected image
     const handleImageClick = (image: string) => {
         setSelectedImage(image);
     };
 
+    // Handle trailer click to show the trailer video
     const handleTrailerClick = () => {
         setSelectedImage("https://www.youtube.com/embed/lWr6dhTcu-E");
     };
 
+    // Check if the URL is for a YouTube video
     const isYoutubeVideo = (url: string) => {
         return url.includes("youtube");
     };
 
+    // Handle adding/removing from wishlist
     const handleWishlistClick = async () => {
         const sessionCookie = Cookies.get('session');
         if (!sessionCookie) {
@@ -55,6 +60,42 @@ const ValorantPage = () => {
         }
     };
 
+    // Handle adding to cart
+    const handleAddToCart = async () => {
+        const sessionCookie = Cookies.get('session');
+        if (!sessionCookie) {
+            window.location.href = '/login';
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/cart', {
+                method: isInCart ? 'DELETE' : 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: "Valorant",
+                    img: '/img/games/valorant.jpg',
+                    link: '/valorant',
+                    price: 0, // Preço do jogo, no caso é gratuito
+                }),
+            });
+
+            if (response.ok) {
+                setIsInCart(!isInCart);
+                alert(isInCart ? 'Removido do carrinho' : 'Adicionado ao carrinho');
+            } else {
+                const errorText = await response.text();
+                console.error('Failed to add to cart:', errorText);
+                alert('Não foi possível adicionar ao carrinho');
+            }
+        } catch (error) {
+            console.error('Error adding to cart:', error);
+            alert('Erro ao adicionar ao carrinho');
+        }
+    };
+
     return (
         <>
             <Search />
@@ -63,22 +104,20 @@ const ValorantPage = () => {
                     <h1>Valorant</h1>
                 </header>
                 <main>
-                    <section className={styles.mainSection}>
-                        <div className={styles.mainBox}>
-                            {isYoutubeVideo(selectedImage) ? (
-                                <iframe
-                                    width="60%"
-                                    height="400"
-                                    src={selectedImage}
-                                    title="Valorant Trailer"
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                ></iframe>
-                            ) : (
-                                <img src={selectedImage} alt="Valorant" className={styles.mainImage} />
-                            )}
-                        </div>
+                    <section className={styles.mainBox}>
+                        {isYoutubeVideo(selectedImage) ? (
+                            <iframe
+                                width="60%"
+                                height="400"
+                                src={selectedImage}
+                                title="Valorant Trailer"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            ></iframe>
+                        ) : (
+                            <img src={selectedImage} alt="Valorant" className={styles.mainImage} />
+                        )}
                     </section>
                     <section className={styles.imageSelector}>
                         <div className={styles.thumbnailContainer}>
@@ -107,12 +146,17 @@ const ValorantPage = () => {
                     <div className={styles.buttonsSection}>
                         <Button className={`${styles.buyButton} ${styles.priceCard}`}>Grátis</Button>
                         <Button className={styles.buyButton}>COMPRAR</Button>
-                        <Button className={styles.cartButton}>ADICIONAR AO CARRINHO</Button>
                         <Button 
-                            className={styles.cartButton} 
+                            className={styles.cartButton}
+                            onClick={handleAddToCart}
+                        >
+                            {isInCart ? 'REMOVER DO CARRINHO' : 'ADICIONAR AO CARRINHO'}
+                        </Button>
+                        <Button 
+                            className={`${styles.cartButton} ${isInWishlist ? styles.inWishlist : ''}`} 
                             onClick={handleWishlistClick}
                         >
-                             ADICIONAR À LISTA DE DESEJOS
+                            {isInWishlist ? 'REMOVER DA LISTA DE DESEJOS' : 'ADICIONAR À LISTA DE DESEJOS'}
                         </Button>
                     </div>
                 </main>

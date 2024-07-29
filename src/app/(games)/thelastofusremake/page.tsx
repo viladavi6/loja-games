@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import Cookies from 'js-cookie';
 import styles from '../../style-games/Global.module.css';
@@ -8,6 +8,36 @@ import Search from '@/app/components/Search/Search';
 const Page = () => {
     const [selectedImage, setSelectedImage] = useState("/img/thelastofusremake/1.png");
     const [isInWishlist, setIsInWishlist] = useState(false);
+
+    useEffect(() => {
+        const checkWishlistStatus = async () => {
+            const sessionCookie = Cookies.get('session');
+            if (!sessionCookie) return;
+
+            try {
+                const response = await fetch('/api/wishlist/status', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        title: "The Last of Us Remake",
+                    }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setIsInWishlist(data.isInWishlist);
+                } else {
+                    console.error('Failed to fetch wishlist status');
+                }
+            } catch (error) {
+                console.error('Error fetching wishlist status:', error);
+            }
+        };
+
+        checkWishlistStatus();
+    }, []);
 
     const handleImageClick = (image: string) => {
         setSelectedImage(image);
@@ -52,6 +82,40 @@ const Page = () => {
         } catch (error) {
             console.error('Error updating wishlist:', error);
             alert('Erro ao atualizar a lista de desejos');
+        }
+    };
+
+    const handleAddToCart = async () => {
+        const sessionCookie = Cookies.get('session');
+        if (!sessionCookie) {
+            window.location.href = '/login';
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: "The Last of Us Remake",
+                    img: '/img/games/thelastofus.jpg',
+                    link: '/thelastofusremake',
+                    price: 250, // Preço do jogo
+                }),
+            });
+
+            if (response.ok) {
+                alert('Adicionado ao carrinho');
+            } else {
+                const errorText = await response.text();
+                console.error('Failed to add to cart:', errorText);
+                alert('Não foi possível adicionar ao carrinho');
+            }
+        } catch (error) {
+            console.error('Error adding to cart:', error);
+            alert('Erro ao adicionar ao carrinho');
         }
     };
 
@@ -107,12 +171,14 @@ const Page = () => {
                     <div className={styles.buttonsSection}>
                         <Button className={`${styles.buyButton} ${styles.priceCard}`}>R$250</Button>
                         <Button className={styles.buyButton}>COMPRAR</Button>
-                        <Button className={styles.cartButton}>ADICIONAR AO CARRINHO</Button>
+                        <Button className={styles.cartButton} onClick={handleAddToCart}>
+                            ADICIONAR AO CARRINHO
+                        </Button>
                         <Button 
-                            className={styles.cartButton} 
+                            className={`${styles.cartButton} ${isInWishlist ? styles.inWishlist : ''}`} 
                             onClick={handleWishlistClick}
                         >
-                            ADICIONAR À LISTA DE DESEJOS
+                            {isInWishlist ? 'REMOVER DA LISTA DE DESEJOS' : 'ADICIONAR À LISTA DE DESEJOS'}
                         </Button>
                     </div>
                 </main>

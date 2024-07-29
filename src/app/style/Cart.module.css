@@ -1,0 +1,91 @@
+.container {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .cartTitle {
+    margin-bottom: 5%;
+    font-size: large;
+  }
+  
+  .listGroup {
+    text-align: center;
+  }
+  
+  .cartItem {
+    padding: 2%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 3%;
+    width: 100%;
+  }
+  
+  .gameInfo {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .gameImage {
+    width: 20%;
+    height: auto;
+    object-fit: cover;
+    margin-right: 5%;
+  }
+  
+  .gameTitle {
+    flex: 1;
+    color: #ffff;
+  }
+  
+  .gamePrice {
+    margin: 0 10px;
+  }
+  
+  .removeButton {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    margin-left: 5%;
+  }
+  
+  .removeButton:hover {
+    background-color: #c82333;
+  }
+  
+  .totalSection {
+    margin-top: 5%;
+  }
+  
+  .checkoutButton {
+    background: linear-gradient(145deg, #28a745, #218838);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem; 
+    padding: 10px 20px; 
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  .checkoutButton:hover {
+    background: linear-gradient(145deg, #218838, #1e7e34); 
+    transform: scale(1.05); 
+  }
+  
+  .checkoutButton:focus {
+    outline: none; 
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5); 
+  }
+  
+  .checkoutButton:active {
+    transform: scale(0.98); 
+  }
+  

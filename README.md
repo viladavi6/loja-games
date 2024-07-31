@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# 📚Site de Games(Inpirado na Epic)
 
-First, run the development server:
+Projeto feito no módulo do meu curso, criei um clone da Epic Games porém a minha versão chamada TakeControl.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## ▶ Como Executar o Código?
 
-To learn more about Next.js, take a look at the following resources:
+É necessário ter o Node instalado.
+Utilizar npm install para instalar as dependências e o npm run dev para executar o site
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 🎞 Imagens do Projeto
+![image](https://github.com/user-attachments/assets/ce3c07f5-5e67-48d5-8f25-9f13a34bc0bd)
+![image](https://github.com/user-attachments/assets/8a7d8884-0843-4f87-b674-d79d1dcab64f)
+![image](https://github.com/user-attachments/assets/f2a8ee83-148e-4c9d-8422-fe396601fd88)
+![image](https://github.com/user-attachments/assets/650658dc-a94a-455e-bb23-4ed534a5aef9)
+![image](https://github.com/user-attachments/assets/80ec1fcf-7b0b-45f3-96ed-357e0c54e2ce)
+![image](https://github.com/user-attachments/assets/5ce040db-f3f4-43f0-b864-397266fc4766)
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## ⚙ Ferramentas Utilizadas 
+
+<div>
+  <img width="50px" lang="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" />
+  <img width="50px" lang="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" />
+  <img width="50px" lang="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original-wordmark.svg" />
+  <img width="50px" lang="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original-wordmark.svg" />
+  <img width="50px" lang="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original-wordmark.svg" />
+  <img width="50px" lang="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" />                          
+</div>

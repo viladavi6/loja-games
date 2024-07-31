@@ -24,7 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         res.setHeader('Set-Cookie', serialize('session', JSON.stringify({ username: user.username }), {
           path: '/',
           httpOnly: false,
-          maxAge: 60 * 60 * 24 * 7, // 1 semana
+          maxAge: 60 * 60 * 24 * 7,
         }));
 
         return res.status(200).json({ message: 'Login successful', user: { username: user.username } });

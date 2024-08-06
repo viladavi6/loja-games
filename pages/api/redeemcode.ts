@@ -2,6 +2,18 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import db from '../../src/lib/db';
 
 const redeemCode = async (req: NextApiRequest, res: NextApiResponse) => {
+  const sessionCookie = req.cookies.session;
+
+  if (!sessionCookie) {
+    return res.status(401).json({ error: 'Unauthorized: No session cookie' });
+  }
+
+  const userId = await getUserIdFromSession(sessionCookie);
+
+  if (!userId) {
+    return res.status(401).json({ error: 'Unauthorized: Invalid session' });
+  }
+
   if (req.method === 'POST') {
     try {
       const { code } = req.body;
@@ -11,7 +23,6 @@ const redeemCode = async (req: NextApiRequest, res: NextApiResponse) => {
 
       if (giftCard) {
         // Atualizar o saldo do usuário
-        const userId = 1; // Substitua pelo ID do usuário autenticado
         const amount = giftCard.amount;
 
         await db.run('UPDATE users SET balance = balance + ? WHERE id = ?', amount, userId);
@@ -32,3 +43,14 @@ const redeemCode = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 export default redeemCode;
+
+async function getUserIdFromSession(sessionCookie: string): Promise<number | null> {
+  try {
+    const session = JSON.parse(sessionCookie);
+    const user = await db.get('SELECT id FROM users WHERE username = ?', session.username);
+    return user ? user.id : null;
+  } catch (error) {
+    console.error('Error retrieving user ID from session:', error);
+    return null;
+  }
+}

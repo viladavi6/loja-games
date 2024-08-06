@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Container, ListGroup, Button } from "react-bootstrap";
 import styles from "../style/Cart.module.css";
+import Link from "next/link";
 
 interface CartItem {
   title: string;
@@ -15,7 +16,6 @@ const Cart = () => {
   const [totalCost, setTotalCost] = useState<number>(0);
   const [balance, setBalance] = useState<number>(0);
 
-  // Função para buscar dados do carrinho e saldo
   const fetchCartData = async () => {
     try {
       const response = await fetch('/api/cart');
@@ -25,10 +25,11 @@ const Cart = () => {
         calculateTotalCost(data.cartItems);
         setBalance(data.balance);
       } else {
-        console.error('Failed to fetch cart data');
+        const errorData = await response.json();
+        alert(`Falha ao buscar dados do carrinho: ${errorData.error || 'Erro desconhecido.'}`);
       }
-    } catch (error) {
-      console.error('Error fetching cart data:', error);
+    } catch {
+      alert('Erro ao buscar dados do carrinho.');
     }
   };
 
@@ -36,28 +37,11 @@ const Cart = () => {
     fetchCartData();
   }, []);
 
-  // Função para calcular o custo total do carrinho
   const calculateTotalCost = (items: CartItem[]) => {
     const total = items.reduce((sum, item) => sum + item.price, 0);
     setTotalCost(total);
   };
 
-  // Função para atualizar o saldo
-  const fetchBalance = async () => {
-    try {
-      const response = await fetch('/api/user/balance');
-      if (response.ok) {
-        const data = await response.json();
-        setBalance(data.balance);
-      } else {
-        console.error('Failed to fetch balance');
-      }
-    } catch (error) {
-      console.error('Error fetching balance:', error);
-    }
-  };
-
-  // Função para remover um item do carrinho
   const handleRemoveFromCart = async (title: string) => {
     try {
       const response = await fetch("/api/cart", {
@@ -72,54 +56,43 @@ const Cart = () => {
         const updatedItems = cartItems.filter((item) => item.title !== title);
         setCartItems(updatedItems);
         calculateTotalCost(updatedItems);
-        await fetchBalance(); // Atualiza o saldo após remover um item
-        alert("Item removed from cart!");
+        alert("Item removido do carrinho!");
       } else {
         const errorData = await response.json();
-        console.error("Error removing from cart:", errorData.error);
-        alert(`Failed to remove from cart: ${errorData.error}`);
+        alert(`Falha ao remover o item do carrinho: ${errorData.error || 'Erro desconhecido.'}`);
       }
-    } catch (error) {
-      console.error("Error during remove from cart:", error);
-      alert("Error removing item from cart.");
+    } catch {
+      alert('Erro ao remover item do carrinho.');
     }
   };
 
-  // Função para finalizar a compra
   const handleCheckout = async () => {
     if (cartItems.length === 0) {
-      alert("The cart is empty.");
+      alert("O carrinho está vazio.");
       return;
     }
 
     try {
-      const response = await fetch("/api/cart/checkout", {
+      const response = await fetch("/api/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ cartItems }),
+        body: JSON.stringify({ checkout: true }),
       });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Error during checkout:", errorText);
-        alert("Error during checkout.");
+      if (balance > totalCost) {
+        alert("Obrigado pela compra.");
         return;
       }
-
-      const result = await response.json();
-      if (result.success) {
-        alert("Checkout successful!");
-        setCartItems([]); // Clear the cart after successful checkout
-        setTotalCost(0); // Clear total cost after successful checkout
-        await fetchBalance(); // Atualiza o saldo após a compra
-      } else {
-        alert("Checkout failed.");
+  
+      if (balance < totalCost) {
+        alert("Saldo insuficiente.");
+        return;
       }
-    } catch (error) {
-      console.error("Error during checkout:", error);
-      alert("Error processing checkout.");
+      
+    } catch {
+      alert('Erro ao processar a compra.');
     }
   };
 
@@ -144,21 +117,23 @@ const Cart = () => {
                   onClick={() => handleRemoveFromCart(item.title)}
                   className={styles.removeButton}
                 >
-                  &times;
+                  Remover
                 </Button>
               </div>
             </ListGroup.Item>
           ))
         ) : (
-          <p>Seu carrinho está vazio.</p>
+          <ListGroup.Item>O carrinho está vazio.</ListGroup.Item>
         )}
       </ListGroup>
       <div className={styles.totalSection}>
-        <p>Saldo: R$ {balance.toFixed(2).replace(".", ",")}</p>
+        <p>Saldo Atual: R$ {balance.toFixed(2).replace(".", ",")}</p>
         <p>Total do Carrinho: R$ {totalCost.toFixed(2).replace(".", ",")}</p>
-        <Button onClick={handleCheckout} className={styles.checkoutButton}>
-          Finalizar Compra
-        </Button>
+        <Link href='/library'>
+          <Button onClick={handleCheckout} className={styles.checkoutButton}>
+            Finalizar Compra
+          </Button>
+        </Link>
       </div>
     </Container>
   );

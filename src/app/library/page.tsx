@@ -4,8 +4,8 @@ import { Container, ListGroup, Button } from 'react-bootstrap';
 import styles from '../style/Library.module.css';
 
 const Library = () => {
+
   const [libraryItems, setLibraryItems] = useState<{ title: string; img: string; link: string; }[]>([]);
-  const [balance, setBalance] = useState(0);
 
   useEffect(() => {
     const fetchLibrary = async () => {
@@ -22,31 +22,10 @@ const Library = () => {
       }
     };
 
-    const fetchBalance = async () => {
-      try {
-        const response = await fetch('/api/user/saldo');
-        if (response.ok) {
-          const data = await response.json();
-          setBalance(data.balance);
-        } else {
-          console.error('Failed to fetch balance');
-        }
-      } catch (error) {
-        console.error('Error fetching balance:', error);
-      }
-    };
-
     fetchLibrary();
-    fetchBalance();
   }, []);
 
-  const handleInstall = async (title: string, price: number) => {
-    if (price > balance) {
-      alert('Saldo insuficiente para instalar este jogo.');
-      return;
-    }
-
-    // Aqui você pode adicionar a lógica para instalar o jogo, por exemplo, adicionando-o ao carrinho ou à biblioteca
+  const handleInstall = async (title: string) => {
     alert(`Instalando ${title}...`);
   };
 
@@ -60,12 +39,14 @@ const Library = () => {
               <div className={styles.gameInfo}>
                 <img src={item.img} alt={item.title} className={styles.gameImage} />
                 <a href={item.link} className={styles.gameTitle}>{item.title}</a>
+                <div>
                 <Button
                   className={styles.installButton}
-                  onClick={() => handleInstall(item.title, 10)} // Supondo que o preço seja 10, ajuste conforme necessário
+                  onClick={() => handleInstall(item.title)}
                 >
                   Instalar
                 </Button>
+                </div>
               </div>
             </ListGroup.Item>
           ))

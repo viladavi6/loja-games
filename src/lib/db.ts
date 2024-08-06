@@ -38,6 +38,19 @@ async function initializeDatabase(): Promise<void> {
     );
   `);
 
+  // Criar a tabela library se não existir
+  await db.exec(`
+    CREATE TABLE IF NOT EXISTS library (
+      user_id INTEGER NOT NULL,
+      title TEXT NOT NULL,
+      img TEXT NOT NULL,
+      link TEXT NOT NULL,
+      price REAL NOT NULL,
+      PRIMARY KEY (user_id, title),
+      FOREIGN KEY (user_id) REFERENCES users(id)
+    );
+  `);
+
   // Criar a tabela cart se não existir
   await db.exec(`
     CREATE TABLE IF NOT EXISTS cart (

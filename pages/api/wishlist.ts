@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import db from '@/lib/db'; // Ajuste o caminho conforme necessário
+import db from '@/lib/db';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const sessionCookie = req.cookies.session;
@@ -61,8 +61,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 }
 
-// Função fictícia para obter o user_id a partir do cookie de sessão
 async function getUserIdFromSession(sessionCookie: string): Promise<number | null> {
-  console.log('Retrieving user ID for session:', sessionCookie);
-  return 1; // Substitua pelo valor real obtido com base no cookie de sessão
+  try {
+    const session = JSON.parse(sessionCookie);
+    const user = await db.get('SELECT id FROM users WHERE username = ?', session.username);
+    return user ? user.id : null;
+  } catch (error) {
+    console.error('Error retrieving user ID from session:', error);
+    return null;
+  }
 }

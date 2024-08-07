@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; // Adicione useEffect aqui
 import { Button } from 'react-bootstrap';
 import Cookies from 'js-cookie';
 import styles from '../../style-games/Global.module.css';
@@ -7,6 +7,8 @@ import Search from '@/app/components/Search/Search';
 
 const Page = () => {
     const [selectedImage, setSelectedImage] = useState("/img/darksoulsremastered/1.png");
+    const [isInCart, setIsInCart] = useState(false);
+    const [isInWishlist, setIsInWishlist] = useState(false);
     const [isAddingWishlist, setIsAddingWishlist] = useState(false);
     const [isAddingCart, setIsAddingCart] = useState(false);
 
@@ -22,6 +24,43 @@ const Page = () => {
         return url.includes("youtube");
     };
 
+    const checkIfInCart = async () => {
+        try {
+            const response = await fetch('/api/gameonlibrary', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ title: "Dark Souls Remastered" }),
+            });
+            const data = await response.json();
+            setIsInCart(data.exists);
+        } catch (error) {
+            console.error('Erro ao verificar o carrinho:', error);
+        }
+    };
+
+    const checkIfInWishlist = async () => {
+        try {
+            const response = await fetch('/api/checkwishlist', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ title: "Dark Souls Remastered" }),
+            });
+            const data = await response.json();
+            setIsInWishlist(data.exists);
+        } catch (error) {
+            console.error('Erro ao verificar a lista de desejos:', error);
+        }
+    };
+
+    useEffect(() => {
+        checkIfInCart();
+        checkIfInWishlist();
+    }, []);
+
     const handleAddToWishlist = async () => {
         const sessionCookie = Cookies.get('session');
         if (!sessionCookie) {
@@ -29,7 +68,12 @@ const Page = () => {
             return;
         }
 
-        setIsAddingWishlist(true); // Disable button
+        if (isInWishlist) {
+            alert('Jogo já está na lista de desejos!');
+            return;
+        }
+
+        setIsAddingWishlist(true);
 
         try {
             const response = await fetch('/api/wishlist', {
@@ -46,6 +90,7 @@ const Page = () => {
 
             if (response.ok) {
                 alert('Adicionado à lista de desejos');
+                setIsInWishlist(true);
             } else {
                 const errorText = await response.text();
                 console.error('Failed to add to wishlist:', errorText);
@@ -55,7 +100,7 @@ const Page = () => {
             console.error('Error adding to wishlist:', error);
             alert('Erro ao adicionar à lista de desejos. Tente novamente mais tarde.');
         } finally {
-            setIsAddingWishlist(false); // Re-enable button
+            setIsAddingWishlist(false);
         }
     };
 
@@ -66,7 +111,12 @@ const Page = () => {
             return;
         }
 
-        setIsAddingCart(true); // Disable button
+        if (isInCart) {
+            alert('Você já possui este jogo na sua biblioteca.');
+            return;
+        }
+
+        setIsAddingCart(true);
 
         try {
             const response = await fetch('/api/cart', {
@@ -78,12 +128,13 @@ const Page = () => {
                     title: "Dark Souls Remastered",
                     img: '/img/games/darksouls.jpg',
                     link: '/darksoulsremastered',
-                    price: 250, // Preço do jogo
+                    price: 250,
                 }),
             });
 
             if (response.ok) {
                 alert('Adicionado ao carrinho');
+                setIsInCart(true);
             } else {
                 const errorText = await response.text();
                 console.error('Failed to add to cart:', errorText);
@@ -93,7 +144,7 @@ const Page = () => {
             console.error('Error adding to cart:', error);
             alert('Erro ao adicionar ao carrinho. Tente novamente mais tarde.');
         } finally {
-            setIsAddingCart(false); // Re-enable button
+            setIsAddingCart(false);
         }
     };
 
@@ -148,20 +199,19 @@ const Page = () => {
 
                     <div className={styles.buttonsSection}>
                         <Button className={`${styles.buyButton} ${styles.priceCard}`}>R$250</Button>
-                        <Button className={styles.buyButton}>COMPRAR</Button>
                         <Button
                             className={styles.cartButton}
                             onClick={handleAddToCart}
-                            disabled={isAddingCart} // Disable button while adding
+                            disabled={isInCart}
                         >
-                            {isAddingCart ? 'Adicionando...' : 'ADICIONAR AO CARRINHO'}
+                            {isInCart ? 'VOCÊ JÁ COMPROU ESTE JOGO' : 'ADICIONAR AO CARRINHO'}
                         </Button>
                         <Button
                             className={styles.cartButton}
                             onClick={handleAddToWishlist}
-                            disabled={isAddingWishlist} // Disable button while adding
+                            disabled={isInWishlist}
                         >
-                            {isAddingWishlist ? 'Adicionando...' : 'ADICIONAR À LISTA DE DESEJOS'}
+                            {isInWishlist ? 'ADICIONADO À LISTA DE DESEJOS' : 'ADICIONAR À LISTA DE DESEJOS'}
                         </Button>
                     </div>
                 </main>

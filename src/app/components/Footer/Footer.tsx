@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import styles from "../../style/Footer.module.css";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -23,6 +23,13 @@ export default function Footer() {
                                 <li><Link href="/terms">Termos de Uso</Link></li>
                             </ul>
                         )}
+                            <Button 
+                            variant="primary" 
+                            href="https://www.americanas.com.br" 
+                            target="_blank"
+                            >
+                            Comprar Gift Card
+                            </Button>
                         <hr className={styles.horizontalLine} />
                         <p className={styles.text}>
                             © 2024, Take Control, Inc. Todos os direitos reservados. Take Control, o logotipo da Take Control, e todos os nomes de produtos associados são marcas comerciais ou registradas da Take Control, Inc. nos Estados Unidos da América e em outros lugares. Outras marcas e nomes de produtos são marcas registradas de seus respectivos donos.

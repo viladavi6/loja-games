@@ -81,7 +81,7 @@ const Cart = () => {
         body: JSON.stringify({ checkout: true }),
       });
 
-      if (balance > totalCost) {
+      if (balance >= totalCost) {
         alert("Obrigado pela compra.");
         return;
       }
@@ -90,7 +90,7 @@ const Cart = () => {
         alert("Saldo insuficiente.");
         return;
       }
-      
+
     } catch {
       alert('Erro ao processar a compra.');
     }

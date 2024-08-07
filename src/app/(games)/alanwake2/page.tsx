@@ -80,8 +80,8 @@ const Page = () => {
                 },
                 body: JSON.stringify({
                     title: 'Alan Wake 2',
-                    img: '/img/alanwake2/1.png',
-                    link: '/games/alanwake2',
+                    img: 'games/img/alanwake2.jng',
+                    link: '/alanwake2',
                     price: 250,
                 }),
             });

@@ -1,5 +1,6 @@
 "use client";
-import { useState } from 'react';
+
+import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import Cookies from 'js-cookie';
 import styles from '../../style-games/Global.module.css';
@@ -7,6 +8,45 @@ import Search from '@/app/components/Search/Search';
 
 const Page = () => {
     const [selectedImage, setSelectedImage] = useState("/img/awayout/1.png");
+    const [isInCart, setIsInCart] = useState(false);
+    const [isInWishlist, setIsInWishlist] = useState(false);
+
+    useEffect(() => {
+        const checkIfInCart = async () => {
+            try {
+                const response = await fetch('/api/gameonlibrary', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ title: 'A Way Out' }),
+                });
+                const data = await response.json();
+                setIsInCart(data.exists);
+            } catch (error) {
+                console.error('Erro ao verificar o carrinho:', error);
+            }
+        };
+
+        const checkIfInWishlist = async () => {
+            try {
+                const response = await fetch('/api/checkwishlist', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ title: 'A Way Out' }),
+                });
+                const data = await response.json();
+                setIsInWishlist(data.exists);
+            } catch (error) {
+                console.error('Erro ao verificar a lista de desejos:', error);
+            }
+        };
+
+        checkIfInCart();
+        checkIfInWishlist();
+    }, []);
 
     const handleImageClick = (image: string) => {
         setSelectedImage(image);
@@ -27,6 +67,11 @@ const Page = () => {
             return;
         }
 
+        if (isInWishlist) {
+            alert('Jogo já está na lista de desejos!');
+            return;
+        }
+
         try {
             const response = await fetch('/api/wishlist', {
                 method: 'POST',
@@ -42,6 +87,7 @@ const Page = () => {
 
             if (response.ok) {
                 alert('Adicionado à lista de desejos');
+                setIsInWishlist(true);
             } else {
                 const errorText = await response.text();
                 console.error('Failed to add to wishlist:', errorText);
@@ -57,6 +103,11 @@ const Page = () => {
         const sessionCookie = Cookies.get('session');
         if (!sessionCookie) {
             window.location.href = '/login';
+            return;
+        }
+
+        if (isInCart) {
+            alert('Você já possui este jogo na sua biblioteca.');
             return;
         }
 
@@ -76,6 +127,7 @@ const Page = () => {
 
             if (response.ok) {
                 alert('Adicionado ao carrinho');
+                setIsInCart(true);
             } else {
                 const errorText = await response.text();
                 console.error('Failed to add to cart:', errorText);
@@ -138,10 +190,19 @@ const Page = () => {
 
                     <div className={styles.buttonsSection}>
                         <Button className={`${styles.buyButton} ${styles.priceCard}`}>R$250</Button>
-                        <Button className={styles.buyButton}>COMPRAR</Button>
-                        <Button className={styles.cartButton} onClick={handleAddToCart}>ADICIONAR AO CARRINHO</Button>
-                        <Button className={styles.cartButton} onClick={handleAddToWishlist}>
-                            ADICIONAR À LISTA DE DESEJOS
+                        <Button
+                            className={styles.cartButton}
+                            onClick={handleAddToCart}
+                            disabled={isInCart}
+                        >
+                            {isInCart ? 'VOCÊ JÁ COMPROU ESTE JOGO' : 'ADICIONAR AO CARRINHO'}
+                        </Button>
+                        <Button
+                            className={styles.cartButton}
+                            onClick={handleAddToWishlist}
+                            disabled={isInWishlist}
+                        >
+                            {isInWishlist ? 'ADICIONADO À LISTA DE DESEJOS' : 'ADICIONAR À LISTA DE DESEJOS'}
                         </Button>
                     </div>
                 </main>

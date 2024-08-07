@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
@@ -9,6 +9,8 @@ import Search from '@/app/components/Search/Search';
 const Page = () => {
   const [selectedImage, setSelectedImage] = useState("/img/alanwake/1.png");
   const [balance, setBalance] = useState<number>(0);
+  const [gameInLibrary, setGameInLibrary] = useState<boolean>(false);
+  const [gameInWishlist, setGameInWishlist] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchBalance = async () => {
@@ -31,7 +33,73 @@ const Page = () => {
     fetchBalance();
   }, []);
 
+  useEffect(() => {
+    const checkGameInLibrary = async () => {
+      const sessionCookie = Cookies.get('session');
+      if (sessionCookie) {
+        try {
+          const response = await fetch('/api/gameonlibrary', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ title: 'Alan Wake' }),
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            setGameInLibrary(data.exists);
+          } else {
+            console.error('Failed to check game in library');
+          }
+        } catch (error) {
+          console.error('Error checking game in library:', error);
+        }
+      }
+    };
+
+    checkGameInLibrary();
+  }, []);
+
+  useEffect(() => {
+    const checkGameInWishlist = async () => {
+      const sessionCookie = Cookies.get('session');
+      if (sessionCookie) {
+        try {
+          const response = await fetch('/api/checkwishlist', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ title: 'Alan Wake' }),
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            setGameInWishlist(data.exists);
+          } else {
+            console.error('Failed to check game in wishlist');
+          }
+        } catch (error) {
+          console.error('Error checking game in wishlist:', error);
+        }
+      }
+    };
+
+    checkGameInWishlist();
+  }, []);
+
   const handleAddToCart = async () => {
+    if (gameInLibrary) {
+      alert('Você já possui este jogo na sua biblioteca.');
+      return;
+    }
+
+    if (balance < 250) {
+      alert('Saldo insuficiente.');
+      return;
+    }
+
     const sessionCookie = Cookies.get('session');
     if (!sessionCookie) {
       window.location.href = '/login';
@@ -55,6 +123,7 @@ const Page = () => {
       const data = await response.json();
       if (response.ok) {
         alert('Adicionado ao carrinho');
+        setGameInLibrary(true);
       } else {
         console.error('Failed to add to cart:', data.error);
         alert('Não foi possível adicionar ao carrinho');
@@ -66,6 +135,11 @@ const Page = () => {
   };
 
   const handleAddToWishlist = async () => {
+    if (gameInWishlist) {
+      alert('O jogo já está na sua lista de desejos.');
+      return;
+    }
+
     const sessionCookie = Cookies.get('session');
     if (!sessionCookie) {
       window.location.href = '/login';
@@ -87,6 +161,7 @@ const Page = () => {
 
       if (response.ok) {
         alert('Adicionado à lista de desejos');
+        setGameInWishlist(true); 
       } else {
         const errorText = await response.text();
         console.error('Failed to add to wishlist:', errorText);
@@ -96,6 +171,18 @@ const Page = () => {
       console.error('Error adding to wishlist:', error);
       alert('Erro ao adicionar à lista de desejos');
     }
+  };
+
+  const handleImageClick = (image: string) => {
+    setSelectedImage(image);
+  };
+
+  const handleTrailerClick = () => {
+    setSelectedImage("https://www.youtube.com/embed/sSB4QcQMm6E");
+  };
+
+  const isYoutubeVideo = (url: string) => {
+    return url.includes("youtube");
   };
 
   return (
@@ -108,12 +195,38 @@ const Page = () => {
         <main>
           <section className={styles.mainSection}>
             <div className={styles.mainBox}>
-              <img src={selectedImage} alt="Alan Wake" className={styles.mainImage} />
+              {isYoutubeVideo(selectedImage) ? (
+                <iframe
+                  width="60%"
+                  height="400"
+                  src={selectedImage}
+                  title="Alan Wake Trailer"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <img src={selectedImage} alt="Alan Wake" className={styles.mainImage} />
+              )}
             </div>
           </section>
           <section className={styles.imageSelector}>
             <div className={styles.thumbnailContainer}>
-              {/* Adicione miniaturas de imagens e trailers aqui */}
+              {Array.from({ length: 3 }, (_, i) => i + 1).map((index) => (
+                <img
+                  key={index}
+                  src={`/img/alanwake/${index}.png`}
+                  alt={`Alan Wake Screenshot ${index}`}
+                  className={styles.thumbnail}
+                  onClick={() => handleImageClick(`/img/alanwake/${index}.png`)}
+                />
+              ))}
+              <img
+                src="https://img.youtube.com/vi/sSB4QcQMm6E/0.jpg"
+                alt="Alan Wake Trailer Thumbnail"
+                className={styles.thumbnail}
+                onClick={handleTrailerClick}
+              />
             </div>
           </section>
           <section className={styles.desc}>
@@ -124,9 +237,20 @@ const Page = () => {
 
           <div className={styles.buttonsSection}>
             <Button className={`${styles.buyButton} ${styles.priceCard}`}>R$250</Button>
-            <Button className={styles.buyButton}>COMPRAR</Button>
-            <Button className={styles.cartButton} onClick={handleAddToCart}>ADICIONAR AO CARRINHO</Button>
-            <Button className={styles.cartButton} onClick={handleAddToWishlist}>ADICIONAR À LISTA DE DESEJOS</Button>
+            <Button
+              className={styles.cartButton}
+              onClick={handleAddToCart}
+              disabled={gameInLibrary}
+            >
+              {gameInLibrary ? 'VOCÊ JÁ COMPROU ESTE JOGO' : 'ADICIONAR AO CARRINHO'}
+            </Button>
+            <Button
+              className={styles.cartButton}
+              onClick={handleAddToWishlist}
+              disabled={gameInWishlist}
+            >
+              {gameInWishlist ? 'ADICIONADO À LISTA DE DESEJOS' : 'ADICIONAR À LISTA DE DESEJOS'}
+            </Button>
           </div>
         </main>
       </div>

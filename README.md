@@ -38,18 +38,4 @@ Utilizar npm install para instalar as dependências e o npm run dev para executa
   <img width="50px" lang="50px" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" />
 </div>
 
-## 📽️ Vídeo de Apresentação do Projeto
 
-<div>
-  <a href="https://www.youtube.com/watch?v=BoeVWV7_aBY" target="_blank">Assista ao vídeo</a>
-</div>
-
-## 🏳️ Conclusão
-
-<div>
-  O desenvolvimento do site de jogos da empresa fictícia Take Control representa não apenas uma vitrine moderna para a comercialização de games, mas também uma base sólida para a futura expansão da plataforma em direção ao ambiente mobile. A proposta é transformar esse projeto web em um aplicativo Android desenvolvido com React Native, com foco em oferecer uma experiência ágil, intuitiva e personalizada para os usuários.
-  A utilização de tecnologias como React permite o reaproveitamento de componentes, facilitando a adaptação do sistema ao formato mobile, enquanto o foco no sistema operacional Android justifica-se por sua ampla aceitação no mercado e flexibilidade para integração com recursos como armazenamento local, internet e notificações push.
-  Durante o projeto, conceitos de Gestão de Processos foram fundamentais para estruturar o backlog e priorizar funcionalidades que agregam valor ao negócio, como o sistema de login, wishlist, catálogo interativo e histórico de compras. Com uma visão centrada na experiência do usuário, organizamos o fluxo de desenvolvimento de forma estratégica, respeitando etapas de validação, entrega contínua e escalabilidade.
-  Além disso, aplicamos uma análise crítica sobre o funcionamento do aplicativo no ambiente Android, destacando como o sistema operacional gerencia recursos essenciais como memória e conectividade. Esses conhecimentos permitiram alinhar a parte técnica à tomada de decisões gerenciais, reforçando o compromisso com a qualidade do produto final.
-  Em suma, o projeto da Take Control alia tecnologia, gestão e usabilidade para entregar ao mercado uma solução inovadora e funcional no setor de jogos digitais. Essa integração entre desenvolvimento técnico e visão de processos representa o diferencial competitivo da aplicação proposta.
-</div>
